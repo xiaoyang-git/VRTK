@@ -1170,7 +1170,7 @@ namespace VRTK
 
             //Trigger Axis
             currentTriggerAxis.x = ((!triggerTouched && triggerAxisZeroOnUntouch) || currentTriggerAxis.x < triggerForceZeroThreshold ? 0f : currentTriggerAxis.x);
-            if (Vector2ShallowEquals(triggerAxis, currentTriggerAxis))
+            if (VRTK_SharedMethods.Vector2ShallowCompare(triggerAxis, currentTriggerAxis, axisFidelity))
             {
                 triggerAxisChanged = false;
             }
@@ -1235,7 +1235,7 @@ namespace VRTK
 
             //Grip Axis
             currentGripAxis.x = ((!gripTouched && gripAxisZeroOnUntouch) || currentGripAxis.x < gripForceZeroThreshold ? 0f : currentGripAxis.x);
-            if (Vector2ShallowEquals(gripAxis, currentGripAxis))
+            if (VRTK_SharedMethods.Vector2ShallowCompare(gripAxis, currentGripAxis, axisFidelity))
             {
                 gripAxisChanged = false;
             }
@@ -1272,7 +1272,7 @@ namespace VRTK
             }
 
             //Touchpad Axis
-            if (!touchpadTouched || Vector2ShallowEquals(touchpadAxis, currentTouchpadAxis))
+            if (VRTK_SDK_Bridge.IsTouchpadStatic(touchpadTouched, touchpadAxis, currentTouchpadAxis, axisFidelity))
             {
                 touchpadAxisChanged = false;
             }
@@ -1827,13 +1827,6 @@ namespace VRTK
                     OnAliasMenuOff(SetControllerEvent(ref buttonBool, false, buttonPressure));
                 }
             }
-        }
-
-        protected virtual bool Vector2ShallowEquals(Vector2 vectorA, Vector2 vectorB)
-        {
-            var distanceVector = vectorA - vectorB;
-            return Math.Round(Mathf.Abs(distanceVector.x), axisFidelity, MidpointRounding.AwayFromZero) < float.Epsilon
-                   && Math.Round(Mathf.Abs(distanceVector.y), axisFidelity, MidpointRounding.AwayFromZero) < float.Epsilon;
         }
 
         protected virtual void DisableEvents()

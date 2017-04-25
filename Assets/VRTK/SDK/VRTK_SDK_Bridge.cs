@@ -251,6 +251,11 @@
 
         //Touchpad
 
+        public static bool IsTouchpadStatic(bool isTouched, Vector2 currentAxisValues, Vector2 previousAxisValues, int compareFidelity)
+        {
+            return GetControllerSDK().IsTouchpadStatic(isTouched, currentAxisValues, previousAxisValues, compareFidelity);
+        }
+
         public static bool IsTouchpadPressedOnIndex(uint index)
         {
             return GetControllerSDK().IsTouchpadPressedOnIndex(index);

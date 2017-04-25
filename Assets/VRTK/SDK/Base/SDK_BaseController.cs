@@ -231,6 +231,15 @@ namespace VRTK
         public abstract Vector3 GetAngularVelocityOnIndex(uint index);
 
         /// <summary>
+        /// The IsTouchpadStatic method is used to determine if the touchpad is currently not being moved.
+        /// </summary>
+        /// <param name="currentAxisValues"></param>
+        /// <param name="previousAxisValues"></param>
+        /// <param name="compareFidelity"></param>
+        /// <returns>Returns true if the touchpad is not currently being touched or moved.</returns>
+        public abstract bool IsTouchpadStatic(bool isTouched, Vector2 currentAxisValues, Vector2 previousAxisValues, int compareFidelity);
+
+        /// <summary>
         /// The GetTouchpadAxisOnIndex method is used to get the current touch position on the controller touchpad.
         /// </summary>
         /// <param name="index">The index of the tracked object to check for.</param>
